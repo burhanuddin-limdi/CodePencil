@@ -10,7 +10,7 @@ export const Navbar: React.FC<Props> = (props: Props) => {
   const { showOutput, hideOutput, outputVisible } = props;
 
   return (
-    <nav className="flex justify-between bg-[#073642] py-3 px-5 text-[#eee8d5] border-b-[2px] border-[#2aa198] fredoka font-medium">
+    <nav className="flex justify-between bg-[#073642] py-3 px-5 text-[#eee8d5] border-b-[2px] border-[#2aa198] fredoka font-medium place-items-center">
       <div className="flex place-items-center space-x-3">
         <img src="/logo.png" alt="" className="aspect-square w-[30px]" />
         <p className="text-lg">CODEPENCIL</p>
@@ -25,7 +25,7 @@ export const Navbar: React.FC<Props> = (props: Props) => {
         >
           <img src="/linkedin.png" alt="" className="aspect-square w-[20px]" />
         </a>
-        <div className="md:hidden grid place-content-center">
+        <div className="md:hidden grid place-items-center">
           <button>
             {!outputVisible && (
               <img
