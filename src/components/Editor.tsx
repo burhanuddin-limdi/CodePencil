@@ -50,7 +50,7 @@ export const Editor: React.FC<Props> = (props: Props) => {
   return (
     <div className="h-full bg-[#002b36] overflow-y-auto w-full border-b border-[#2aa198]">
       <div className="w-full h-fit bg-[#073642] text-[#eee8d5] font-medium sticky top-0 z-10">
-        <p className="py-1 px-3 border border-[#002b36] h-full w-fit bg-[#002b36]">
+        <p className="py-1 px-3 border border-[#002b36] h-full w-fit bg-[#002b36] fredoka">
           {displayName}
         </p>
       </div>
