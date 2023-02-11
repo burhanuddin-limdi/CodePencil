@@ -5,7 +5,7 @@ import { javascript } from "@codemirror/lang-javascript";
 import { useEffect, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { Navbar } from "./Navbar";
-
+import "../index.css";
 function App() {
   const [htmlCode, sethtml] = useLocalStorage("html", "");
   const [cssCode, setcss] = useLocalStorage("css", "");
@@ -26,12 +26,28 @@ function App() {
     return () => clearTimeout(timeout);
   }, [htmlCode, cssCode, jsCode]);
 
+  const [outputVisible, setOutputVisible] = useState(false);
+  const showOutput = () => {
+    const output = document.querySelector("#output");
+    output?.classList.add("show-output");
+    setOutputVisible(true);
+  };
+  const hideOutput = () => {
+    const output = document.querySelector("#output");
+    output?.classList.remove("show-output");
+    setOutputVisible(false);
+  };
+
   return (
     <>
       <div className="flex flex-col h-screen w-screen overflow-clip">
-        <Navbar />
-        <div className="flex h-ful w-full flex-grow">
-          <div className="flex flex-col min-w-[400px] w-[400px]">
+        <Navbar
+          outputVisible={outputVisible}
+          hideOutput={hideOutput}
+          showOutput={showOutput}
+        />
+        <div className="flex h-ful w-full flex-grow relative">
+          <div className="flex flex-col md:min-w-[400px] md:w-[400px] w-screen">
             <Editor
               language={html}
               displayName={"HTML"}
@@ -51,15 +67,23 @@ function App() {
               onChange={setjs}
             />
           </div>
-          <iframe
-            id="output"
-            srcDoc={srcDoc}
-            title="output"
-            sandbox="allow-scripts"
-            frameBorder="0"
-            width="100%"
-            height="100%"
-          />
+          <div className="md:block hidden w-full h-full bg-white" id="output">
+            <div className="md:hidden block">
+              <Navbar
+                outputVisible={outputVisible}
+                hideOutput={hideOutput}
+                showOutput={showOutput}
+              />
+            </div>
+            <iframe
+              srcDoc={srcDoc}
+              title="output"
+              sandbox="allow-scripts"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          </div>
         </div>
       </div>
     </>
